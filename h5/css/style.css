@@ -23,12 +23,14 @@ body {
     "Microsoft YaHei", sans-serif;
   background: linear-gradient(160deg, var(--bg1), var(--bg2) 48%, var(--bg3));
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .shell {
   max-width: 560px;
   margin: 0 auto;
   padding: 28px 16px 56px;
+  overflow-x: hidden;
 }
 
 .hero {
@@ -118,6 +120,7 @@ body {
 /* Paper / sections */
 .paper {
   padding: 8px 8px 24px;
+  overflow-x: hidden;
 }
 
 .paper-head {
@@ -273,6 +276,7 @@ body {
   margin-top: 18px;
   padding-top: 14px;
   border-bottom: 1px solid rgba(163, 140, 99, 0.16);
+  overflow-x: hidden;
 }
 
 .section:last-child {
@@ -309,6 +313,8 @@ body {
   font-size: 34px;
   line-height: 1.1;
   font-weight: 700;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .type-subname {
@@ -316,6 +322,7 @@ body {
   font-size: 14px;
   line-height: 1.9;
   margin-top: 10px;
+  overflow-wrap: anywhere;
 }
 
 .match {
@@ -327,6 +334,9 @@ body {
   color: #5f7859;
   font-weight: 700;
   font-size: 13px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
 .dim-list {
@@ -351,6 +361,7 @@ body {
   gap: 12px;
   align-items: baseline;
   margin-bottom: 6px;
+  flex-wrap: wrap;
 }
 
 .dim-item-name {

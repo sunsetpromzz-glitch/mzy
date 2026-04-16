@@ -4,7 +4,7 @@
     <view class="hero hero-elegant">
         <view class="badge-up">全新情侣向解析</view>
         <view class="h1 gradient-text">
-            <text class="hero-title-line">MBTI和SBTI都测了，</text>
+            <text class="hero-title-line">MBTI都测了，</text>
             <text class="hero-title-line">确定不测测CPTI吗？</text>
         </view>
         <view class="hero-divider"></view>

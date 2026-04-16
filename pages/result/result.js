@@ -31,7 +31,7 @@ Page({
           }
         })),
         o = e.TYPE_IMAGES[a.code] || "";
-      o && (o = o.replace("./image/", "/images/sbti_images/"));
+      o && (o = o.replace("./image/", "/images/cpti_images/"));
       var r = !!(this.USE_LEGACY_POSTER && o);
       this.setData({
         posterImage: o,
@@ -108,7 +108,7 @@ Page({
       });
     } else {
       var fs = wx.getFileSystemManager();
-      var tempPath = wx.env.USER_DATA_PATH + "/sbti_result_" + Date.now() + ".png";
+      var tempPath = wx.env.USER_DATA_PATH + "/cpti_result_" + Date.now() + ".png";
       
       try {
         fs.copyFileSync(posterPath, tempPath);

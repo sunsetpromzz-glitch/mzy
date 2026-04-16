@@ -1,6 +1,8 @@
 // H5 版 CPTI 结果页：复用 utils/algorithm.js 的 computeResult
 
 var STORAGE_ANSWERS = "cpti_answers";
+var STORAGE_ALLQUESTIONS = "cpti_allQuestions";
+var STORAGE_CURRENTINDEX = "cpti_currentIndex";
 
 function readJSON(key, fallback) {
   try {
@@ -33,7 +35,7 @@ function init() {
   typeName.textContent = (finalType.code || "") + "（" + (finalType.cn || "") + "）";
   sub.textContent = n.sub || "";
   badge.textContent = n.badge || "";
-  desc.textContent = n.desc || "";
+  desc.textContent = finalType.desc || "";
 
   // 维度列表
   var dimSection = document.getElementById("dimSection");
@@ -94,13 +96,16 @@ function init() {
   noteSection.style.display = "";
 
   document.getElementById("restartBtn").addEventListener("click", function () {
+    localStorage.removeItem(STORAGE_ALLQUESTIONS);
+    localStorage.removeItem(STORAGE_ANSWERS);
+    localStorage.removeItem(STORAGE_CURRENTINDEX);
     window.location.href = "./test.html";
   });
 
   document.getElementById("homeBtn").addEventListener("click", function () {
-    localStorage.removeItem("cpti_allQuestions");
+    localStorage.removeItem(STORAGE_ALLQUESTIONS);
     localStorage.removeItem(STORAGE_ANSWERS);
-    localStorage.removeItem("cpti_currentIndex");
+    localStorage.removeItem(STORAGE_CURRENTINDEX);
     window.location.href = "./index.html";
   });
 }
