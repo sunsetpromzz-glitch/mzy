@@ -38,6 +38,14 @@ function computeVisibleQuestions(allQuestions, answers) {
   if (drinkGateIndex !== -1 && answers && answers.drink_gate_q1 === 3) {
     visible.splice(drinkGateIndex + 1, 0, exports.specialQuestions[1]);
   }
+  // 兜底：强制 q30 永远放在最后一题（避免插入隐藏题后被挤到中间）
+  var q30Index = visible.findIndex(function (q) {
+    return q && q.id === "q30";
+  });
+  if (q30Index !== -1) {
+    var q30 = visible.splice(q30Index, 1)[0];
+    visible.push(q30);
+  }
   return visible;
 }
 
@@ -284,12 +292,20 @@ function initDeckIfNeeded() {
   var answers = readJSON(STORAGE_ANSWERS, null);
   if (allQuestions && answers) return;
 
-  var shuffled = exports.shuffle(exports.questions);
+  var fixedLast = exports.questions.find(function (q) {
+    return q && q.id === "q30";
+  });
+  var base = exports.questions.filter(function (q) {
+    return q && q.id !== "q30";
+  });
+
+  var shuffled = exports.shuffle(base);
   var insertPos = Math.floor(Math.random() * shuffled.length) + 1;
   var allQs = [].concat(
     shuffled.slice(0, insertPos),
     [exports.specialQuestions[0]],
-    shuffled.slice(insertPos)
+    shuffled.slice(insertPos),
+    fixedLast ? [fixedLast] : []
   );
 
   writeJSON(STORAGE_ALLQUESTIONS, allQs);

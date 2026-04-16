@@ -380,11 +380,18 @@ body {
 .result-actions {
   display: flex;
   justify-content: space-between;
+  align-items: stretch;
   gap: 12px;
   margin-top: 16px;
+  flex-wrap: nowrap;
 }
 
 .result-actions button {
   flex: 1;
+  min-width: 0;
+  padding: 14px 12px;
+  font-size: 15px;
+  line-height: 1.35;
+  white-space: nowrap;
 }
 
