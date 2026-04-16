@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CPTI问卷（H5）</title>
+    <link rel="stylesheet" href="./h5/css/style.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <div class="paper">
+        <div class="paper-head">
+          <div class="badge small">CPTI QUESTIONNAIRE</div>
+          <div class="paper-title">恋爱问卷进行中</div>
+          <div class="paper-sub">请凭直觉作答，别和理智串供。</div>
+        </div>
+
+        <div class="progress-row">
+          <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+          <div class="progress-text" id="progressText">0 / 31</div>
+        </div>
+
+        <div class="q-meta">
+          <div class="q-badge" id="qBadge">第 1 题</div>
+          <div class="q-dim" id="qDim">维度已隐藏</div>
+        </div>
+
+        <div class="q-title" id="qTitle"></div>
+
+        <div class="options" id="options"></div>
+
+        <div class="actions-bottom">
+          <div class="actions-left" id="actionsLeft"></div>
+          <div class="actions-right" id="actionsRight"></div>
+        </div>
+
+        <div class="hint" id="hint">
+          全选完才会放行。世界已经够乱了，起码把题做完整。
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 复用你项目里的 CommonJS 风格 algorithm.js
+      var exports = {};
+    </script>
+    <script src="./utils/algorithm.js"></script>
+    <script src="./h5/js/test.js"></script>
+  </body>
+</html>
+

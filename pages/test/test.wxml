@@ -1,0 +1,48 @@
+<view class="shell test-shell">
+    <view class="blob blob-1"></view>
+    <view class="blob blob-2"></view>
+    <view class="test-wrap">
+        <view class="paper-head">
+            <view class="badge-up">CPTI QUESTIONNAIRE</view>
+            <view class="paper-title">恋爱问卷进行中</view>
+            <view class="paper-sub">请凭直觉作答，别和理智串供。</view>
+        </view>
+        <view class="topbar">
+            <view class="progress">
+                <view class="progress-bar" style="width:{{progressPercent}}%"></view>
+            </view>
+            <view class="progress-text">{{doneCount}} / {{totalCount}}</view>
+        </view>
+        <view class="question-list">
+            <view class="question" id="q-{{currentQuestion.id}}" wx:if="{{currentQuestion}}">
+                <view class="question-meta">
+                    <view class="badge">第 {{currentIndex+1}} 题</view>
+                    <view>{{currentQuestion.special?'补充题':'维度已隐藏'}}</view>
+                </view>
+                <view class="question-title">{{currentQuestion.text}}</view>
+                <view class="options">
+                    <label bindtap="selectOption" class="option {{answers[currentQuestion.id]===opt.value?'selected':''}}" data-qid="{{currentQuestion.id}}" data-val="{{opt.value}}" wx:for="{{currentQuestion.options}}" wx:for-index="optIndex" wx:for-item="opt" wx:key="value">
+                        <radio checked="{{answers[currentQuestion.id]===opt.value}}" color="var(--accent-strong)" value="{{opt.value}}"></radio>
+                        <view class="option-code">{{['A','B','C','D'][optIndex]}}</view>
+                        <view>{{opt.label}}</view>
+                    </label>
+                </view>
+            </view>
+        </view>
+        <view class="actions-bottom">
+            <view class="hint">{{doneCount===totalCount&&totalCount>0?'都做完了。现在可以把你的电子魂魄交给结果页审判。':'全选完才会放行。世界已经够乱了，起码把题做完整。'}}</view>
+            <view class="btn-group btn-group-dual" wx:if="{{currentIndex===0}}">
+                <button bindtap="backHome" class="btn-secondary">返回首页</button>
+                <button bindtap="nextQuestion" class="btn-secondary" disabled="{{currentIndex>=totalCount-1}}">下一题</button>
+            </view>
+            <view class="btn-group btn-group-dual" wx:if="{{currentIndex>0 && currentIndex<totalCount-1}}">
+                <button bindtap="prevQuestion" class="btn-secondary">上一题</button>
+                <button bindtap="nextQuestion" class="btn-secondary">下一题</button>
+            </view>
+            <view class="btn-group btn-group-dual btn-group-final" wx:if="{{currentIndex===totalCount-1}}">
+                <button bindtap="prevQuestion" class="btn-secondary">上一题</button>
+                <button bindtap="submitTest" class="btn-primary">查看结果</button>
+            </view>
+        </view>
+    </view>
+</view>

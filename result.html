@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CPTI结果（H5）</title>
+    <link rel="stylesheet" href="./h5/css/style.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <div class="paper">
+        <div class="paper-head">
+          <div class="badge small">CPTI RESULT</div>
+          <div class="paper-title">恋爱画像报告</div>
+          <div class="paper-sub">抽象归抽象，真心也是真心。</div>
+        </div>
+
+        <div class="section">
+          <div class="type-kicker" id="modeKicker"></div>
+          <div class="type-name" id="typeName"></div>
+          <div class="type-subname" id="sub"></div>
+          <div class="match" id="badge"></div>
+        </div>
+
+        <div class="section">
+          <div class="h3">恋爱解析</div>
+          <div class="p" id="desc"></div>
+        </div>
+
+        <div class="section" id="dimSection" style="display:none;">
+          <div class="h3">十五维度分析</div>
+          <div class="dim-list" id="dimList"></div>
+        </div>
+
+        <div class="section" id="noteSection" style="display:none;">
+          <div class="h3">温馨提示</div>
+          <div class="p muted" id="funNote"></div>
+        </div>
+
+        <div class="result-actions">
+          <button class="btn-secondary" id="restartBtn">重新测试</button>
+          <button class="btn-primary" id="homeBtn">返回首页</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var exports = {};
+    </script>
+    <script src="./utils/algorithm.js"></script>
+    <script src="./h5/js/result.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,47 @@
+<view class="shell result-shell">
+    <view class="blob blob-1"></view>
+    <view class="blob blob-2"></view>
+    <view class="result-wrap">
+        <view class="result-head">
+            <view class="badge-up">CPTI RESULT</view>
+            <view class="result-title">恋爱画像报告</view>
+            <view class="result-sub">抽象归抽象，真心也是真心。</view>
+        </view>
+
+        <view class="type-box section">
+            <view class="type-name">{{typeName}}</view>
+            <view class="type-subname">{{sub}}</view>
+            <view class="match">{{badge}}</view>
+        </view>
+        
+        <view class="analysis-box section">
+            <view class="h3">恋爱解析</view>
+            <view class="p">{{desc}}</view>
+        </view>
+        
+        <view class="dim-box section" wx:if="{{dimData.length > 0}}">
+            <view class="h3">十五维度分析</view>
+            <view class="dim-list">
+                <view class="dim-item" wx:for="{{dimData}}" wx:key="name">
+                    <view class="dim-item-top">
+                        <view class="dim-item-name">{{item.name}}</view>
+                        <view class="dim-item-score">等级: {{item.level}} | 分数: {{item.score}}</view>
+                    </view>
+                    <view class="p">{{item.explanation}}</view>
+                </view>
+            </view>
+        </view>
+        
+        <view class="note-box section">
+            <view class="p">{{funNote}}</view>
+        </view>
+    </view>
+    
+    <view class="result-actions">
+        <button bindtap="savePoster" class="btn-primary" wx:if="{{showPosterImage}}">保存结果图片</button>
+        <view class="btn-group">
+            <button bindtap="restartTest" class="btn-secondary">重新测试</button>
+            <button bindtap="backHome" class="btn-secondary">返回首页</button>
+        </view>
+    </view>
+</view>
