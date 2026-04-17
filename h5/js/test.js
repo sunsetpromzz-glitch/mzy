@@ -19,6 +19,18 @@ function writeJSON(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
+function buildQuestionDeck() {
+  var fixedLast = exports.questions.find(function (q) {
+    return q && q.id === "q30";
+  });
+  var base = exports.questions.filter(function (q) {
+    return q && q.id !== "q30";
+  });
+
+  var shuffled = exports.shuffle(base);
+  return [].concat(shuffled, fixedLast ? [fixedLast] : []);
+}
+
 function ensureDeck() {
   var allQuestions = readJSON(STORAGE_ALLQUESTIONS, null);
   var answers = readJSON(STORAGE_ANSWERS, null);
@@ -32,12 +44,7 @@ function ensureDeck() {
 
 function computeVisibleQuestions(allQuestions, answers) {
   var visible = [].concat(allQuestions || []);
-  var drinkGateIndex = visible.findIndex(function (q) {
-    return q.id === "drink_gate_q1";
-  });
-  if (drinkGateIndex !== -1 && answers && answers.drink_gate_q1 === 3) {
-    visible.splice(drinkGateIndex + 1, 0, exports.specialQuestions[1]);
-  }
+  // 已移除隐藏题逻辑：不再动态插入额外题目
   // 兜底：强制 q30 永远放在最后一题（避免插入隐藏题后被挤到中间）
   var q30Index = visible.findIndex(function (q) {
     return q && q.id === "q30";
@@ -290,27 +297,21 @@ function initDeckIfNeeded() {
   // 如果用户直接打开 test.html，则这里兜底生成一次。
   var allQuestions = readJSON(STORAGE_ALLQUESTIONS, null);
   var answers = readJSON(STORAGE_ANSWERS, null);
-  if (allQuestions && answers) return;
+  var needsReset = !allQuestions || !answers;
 
-  var fixedLast = exports.questions.find(function (q) {
-    return q && q.id === "q30";
-  });
-  var base = exports.questions.filter(function (q) {
-    return q && q.id !== "q30";
-  });
+  if (!needsReset) {
+    var lastQuestion = allQuestions[allQuestions.length - 1];
+    if (!lastQuestion || lastQuestion.id !== "q30") {
+      needsReset = true;
+    }
+  }
 
-  var shuffled = exports.shuffle(base);
-  var insertPos = Math.floor(Math.random() * shuffled.length) + 1;
-  var allQs = [].concat(
-    shuffled.slice(0, insertPos),
-    [exports.specialQuestions[0]],
-    shuffled.slice(insertPos),
-    fixedLast ? [fixedLast] : []
-  );
-
-  writeJSON(STORAGE_ALLQUESTIONS, allQs);
-  writeJSON(STORAGE_ANSWERS, {});
-  writeJSON(STORAGE_CURRENTINDEX, 0);
+  if (needsReset) {
+    var allQs = buildQuestionDeck();
+    writeJSON(STORAGE_ALLQUESTIONS, allQs);
+    writeJSON(STORAGE_ANSWERS, {});
+    writeJSON(STORAGE_CURRENTINDEX, 0);
+  }
 }
 
 initDeckIfNeeded();

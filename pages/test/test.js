@@ -27,11 +27,8 @@ Page({
     });
 
     var shuffled = algorithm.shuffle(baseQuestions);
-    var insertPos = Math.floor(Math.random() * shuffled.length) + 1;
     var allQuestions = [].concat(
-      shuffled.slice(0, insertPos),
-      [algorithm.specialQuestions[0]],
-      shuffled.slice(insertPos),
+      shuffled,
       fixedLastQuestion ? [fixedLastQuestion] : []
     );
     
@@ -53,13 +50,7 @@ Page({
     var previousCurrent = previousList[this.data.currentIndex];
     var visibleQuestions = [].concat(this.allQuestions);
     var answers = this.data.answers;
-    var drinkGateIndex = visibleQuestions.findIndex(function(q) {
-      return q.id === "drink_gate_q1";
-    });
-
-    if (drinkGateIndex !== -1 && answers.drink_gate_q1 === 3) {
-      visibleQuestions.splice(drinkGateIndex + 1, 0, algorithm.specialQuestions[1]);
-    }
+    // 已移除隐藏题逻辑：不再动态插入额外题目
 
     var doneCount = visibleQuestions.filter(function(q) {
       return answers[q.id] !== undefined;
@@ -97,9 +88,7 @@ Page({
     var newAnswers = Object.assign({}, this.data.answers);
     newAnswers[questionId] = value;
     
-    if (questionId === "drink_gate_q1" && value !== 3) {
-      delete newAnswers.drink_gate_q2;
-    }
+    // 已移除隐藏题逻辑
     
     this.setData({
       answers: newAnswers

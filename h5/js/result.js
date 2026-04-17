@@ -91,7 +91,7 @@ function init() {
   var funNote = document.getElementById("funNote");
   var noteSection = document.getElementById("noteSection");
   funNote.textContent = n.special
-    ? "本测试仅供娱乐。隐藏人格和傻乐兜底都属于作者故意埋的损招，请勿把它当成医学、心理学、相学、命理学或灵异学依据。"
+    ? "本测试仅供娱乐。抽象兜底属于作者故意埋的损招，请勿把它当成医学、心理学、相学、命理学或灵异学依据。"
     : "本测试仅供娱乐，别拿它当诊断、面试、相亲、分手、招魂、算命或人生判决书。你可以笑，但别太当真。";
   noteSection.style.display = "";
 
